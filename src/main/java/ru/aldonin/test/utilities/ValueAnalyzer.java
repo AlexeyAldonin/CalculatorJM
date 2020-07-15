@@ -45,13 +45,13 @@ public class ValueAnalyzer {
          if (!symbolIsMathSign(symbols[1])) {
              throw new InvalidOperatorException("Введён некорректный знак операции \"" + symbols[2] + "\"");
          }
-         if (!validateNumberRange(convertToInt(symbols[0])) || !validateNumberRange(convertToInt(symbols[2]))) {
+         if (validateNumberRange(convertToInt(symbols[0])) || validateNumberRange(convertToInt(symbols[2]))) {
              throw new InvalidInputFormatException("Введённые числа вне допустимого диапазона");
          }
          return true;
      }
 
-     private static boolean stringIsRomanNumber(String input) {
+     public static boolean stringIsRomanNumber(String input) {
          for (RomanNumber number : RomanNumber.values()) {
              if (input.equalsIgnoreCase(number.name())) {
                  return true;
@@ -75,6 +75,6 @@ public class ValueAnalyzer {
      }
 
     private static boolean validateNumberRange (int n) {
-         return n >= 1 && n <= 10;
+         return n < 1 || n > 10;
      }
 }
